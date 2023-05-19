@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace CasinoRoyal
 {
@@ -14,36 +13,33 @@ namespace CasinoRoyal
             Player playerTwo = new Player() { Cash = 400, Name = "Player #2" };
             Player playerThree = new Player() { Cash = 2000, Name = "Player #3" };
 
-            Player[] list = new Player[] { player, playerTwo, playerThree };
-            int selectedPlayer = 0;
-
-            //Console.WriteLine(list[1].Cash);
-
+            Player[] playerArray = new Player[] { player, playerTwo, playerThree };
+            int selectedPlayer;
             while (true)
             {
-                foreach (var value in list)
+                foreach (var value in playerArray)
                 {
                     value.WriteMyInfo();
                 }
 
                 Console.WriteLine("Choose a player please 1,2 or 3");
                 string playerChoice = Console.ReadLine();
-                if (int.TryParse(playerChoice, out int choice)){
+                if (int.TryParse(playerChoice, out int choice))
+                {
                     selectedPlayer = choice - 1;
                     break;
                 }
             }
-            
 
             while (true)
             {
-                if (list[selectedPlayer].Cash == 0)
+                if (playerArray[selectedPlayer].Cash == 0)
                 {
                     Console.WriteLine("The house always wins.\n");
                     return;
                 }
                 Console.WriteLine($"Welcome to the casino the odds are {odds}.");
-                list[selectedPlayer].WriteMyInfo();
+                playerArray[selectedPlayer].WriteMyInfo();
 
                 Console.WriteLine("How much would you want to bet: ");
                 string howMuch = Console.ReadLine();
@@ -54,13 +50,13 @@ namespace CasinoRoyal
                     int pot = amount * 2;
                     if (chacne <= odds)
                     {
-                        list[selectedPlayer].GiveCash(amount);
+                        playerArray[selectedPlayer].GiveCash(amount);
                         Console.WriteLine("Bad luck you lose.");
 
                     }
                     else
                     {
-                        list[selectedPlayer].ReceiveCash(pot);
+                        playerArray[selectedPlayer].ReceiveCash(pot);
                         Console.WriteLine($"You win {pot}");
                     }
                 }
