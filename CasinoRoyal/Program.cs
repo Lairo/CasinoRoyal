@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.NetworkInformation;
 
 namespace CasinoRoyal
 {
@@ -28,6 +29,24 @@ namespace CasinoRoyal
                 {
                     selectedPlayer = choice - 1;
                     break;
+                }
+            }
+
+            while (true) {
+
+                Console.WriteLine($"Welcome to the casino the odds are {(odds*100):%}.");
+                Console.WriteLine($"Would you like to change the odds?(Y or N)");
+                string choice = Console.ReadLine();
+                if (choice == "") break;
+                if (choice == "y" || choice == "Y")
+                {
+                    Console.WriteLine($"Please set new odds (current odds {odds}): ");
+                    string newOdds = Console.ReadLine();
+                    if (int.TryParse(newOdds, out int amount))
+                    {
+                        odds = (double)amount/100;
+                        break;
+                    }
                 }
             }
 
